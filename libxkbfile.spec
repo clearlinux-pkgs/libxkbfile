@@ -4,7 +4,7 @@
 #
 Name     : libxkbfile
 Version  : 1.0.9
-Release  : 7
+Release  : 8
 URL      : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.0.9.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.0.9.tar.gz
 Summary  : The xkbfile Library
