@@ -6,7 +6,7 @@
 #
 Name     : libxkbfile
 Version  : 1.1.0
-Release  : 11
+Release  : 12
 URL      : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz
 Source99 : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz.sig
@@ -61,8 +61,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552834564
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1557107849
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -74,7 +80,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1552834564
+export SOURCE_DATE_EPOCH=1557107849
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libxkbfile
 cp COPYING %{buildroot}/usr/share/package-licenses/libxkbfile/COPYING
