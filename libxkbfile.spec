@@ -6,11 +6,11 @@
 #
 Name     : libxkbfile
 Version  : 1.1.0
-Release  : 13
+Release  : 14
 URL      : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz
-Source99 : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz.sig
-Summary  : X11 keyboard file manipulation library
+Source1  : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz.sig
+Summary  : The xkbfile Library
 Group    : Development/Tools
 License  : HPND
 Requires: libxkbfile-lib = %{version}-%{release}
@@ -55,35 +55,37 @@ license components for the libxkbfile package.
 
 %prep
 %setup -q -n libxkbfile-1.1.0
+cd %{_builddir}/libxkbfile-1.1.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557107849
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604609922
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557107849
+export SOURCE_DATE_EPOCH=1604609922
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libxkbfile
-cp COPYING %{buildroot}/usr/share/package-licenses/libxkbfile/COPYING
+cp %{_builddir}/libxkbfile-1.1.0/COPYING %{buildroot}/usr/share/package-licenses/libxkbfile/4f35a76dbcc982e002982b97c5d93f3d95c5e57f
 %make_install
 
 %files
@@ -107,4 +109,4 @@ cp COPYING %{buildroot}/usr/share/package-licenses/libxkbfile/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libxkbfile/COPYING
+/usr/share/package-licenses/libxkbfile/4f35a76dbcc982e002982b97c5d93f3d95c5e57f
