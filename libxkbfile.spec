@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCFDF148828C642A7 (alanc@freedesktop.org)
 #
 Name     : libxkbfile
-Version  : 1.1.0
-Release  : 14
-URL      : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz
-Source0  : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz
-Source1  : http://xorg.freedesktop.org/releases/individual/lib/libxkbfile-1.1.0.tar.gz.sig
+Version  : 1.1.1
+Release  : 15
+URL      : https://www.x.org/releases/individual/lib/libxkbfile-1.1.1.tar.gz
+Source0  : https://www.x.org/releases/individual/lib/libxkbfile-1.1.1.tar.gz
+Source1  : https://www.x.org/releases/individual/lib/libxkbfile-1.1.1.tar.gz.sig
 Summary  : The xkbfile Library
 Group    : Development/Tools
 License  : HPND
@@ -54,23 +54,23 @@ license components for the libxkbfile package.
 
 
 %prep
-%setup -q -n libxkbfile-1.1.0
-cd %{_builddir}/libxkbfile-1.1.0
+%setup -q -n libxkbfile-1.1.1
+cd %{_builddir}/libxkbfile-1.1.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604609922
+export SOURCE_DATE_EPOCH=1666102147
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -82,10 +82,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1604609922
+export SOURCE_DATE_EPOCH=1666102147
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libxkbfile
-cp %{_builddir}/libxkbfile-1.1.0/COPYING %{buildroot}/usr/share/package-licenses/libxkbfile/4f35a76dbcc982e002982b97c5d93f3d95c5e57f
+cp %{_builddir}/libxkbfile-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libxkbfile/4f35a76dbcc982e002982b97c5d93f3d95c5e57f || :
 %make_install
 
 %files
